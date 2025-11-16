@@ -516,13 +516,13 @@ def merge_pdfs():
 
     # ---------------------- HEADER ----------------------
     st.markdown("""
-        <div class="glass-box">
+        <div class="glass-box" style = "color:black">
             <h1 class="animated-title">📄 PDF Merger</h1>
             <div class="subtitle">Effortlessly combine multiple PDF files into one beautiful document.<br>
             <span style="font-size:16px;opacity:0.9;">Upload, arrange, and merge with a single click.</span></div>
-            <div class="step">1️⃣ <b>Upload</b> your PDF files</div>
-            <div class="step">2️⃣ <b>Arrange</b> them in your preferred order</div>
-            <div class="step">3️⃣ <b>Merge</b> and <b>Download</b> your new PDF</div>
+            <div class="step" style="color:black;">1️⃣ <b>Upload</b> your PDF files</div>
+            <div class="step" style="color:black;">2️⃣ <b>Arrange</b> them in your preferred order</div>
+            <div class="step" style="color:black;">3️⃣ <b>Merge</b> and <b>Download</b> your new PDF</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -585,7 +585,7 @@ def merge_pdfs():
 
     # ---------------------- FOOTER ----------------------
     st.markdown("""
-        <div style="text-align:center; margin-top:38px; color:rgba(255,255,255,0.85); font-size:15px;">
+        <div style="text-align:center; margin-top:38px; color:black; font-size:15px;">
             Made with ❤️ by <b>SnapScribe</b> • Secure • Fast • Beautiful<br>
             <span style="font-size:13px;opacity:0.8;">Your files are never stored. All processing is done securely.</span>
         </div>
@@ -686,9 +686,9 @@ def image_to_pdf_converter():
             <h1 class="animated-title">🖼️ Image to PDF Converter</h1>
             <div class="subtitle">Transform your images into a single, high-quality PDF document.<br>
             <span style="font-size:16px;opacity:0.9;">Upload, arrange, and convert with ease!</span></div>
-            <div class="step">1️⃣ <b>Upload</b> your images (PNG, JPG, JPEG)</div>
-            <div class="step">2️⃣ <b>Arrange</b> them in your preferred order</div>
-            <div class="step">3️⃣ <b>Convert</b> and <b>Download</b> your PDF</div>
+            <div class="step" style="color:black;">1️⃣ <b>Upload</b> your images (PNG, JPG, JPEG)</div>
+            <div class="step" style="color:black;">2️⃣ <b>Arrange</b> them in your preferred order</div>
+            <div class="step" style="color:black;">3️⃣ <b>Convert</b> and <b>Download</b> your PDF</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -731,9 +731,9 @@ def image_to_pdf_converter():
 
     # ---------------------- FOOTER ----------------------
     st.markdown("""
-        <div style="text-align:center; margin-top:38px; color:white; font-size:15px;">
+        <div style="text-align:center; margin-top:38px; color:black; font-size:15px;">
             Made with ❤️ by <b>SnapScribe</b> • Secure • Fast • Beautiful<br>
-            <span style="font-size:13px;opacity:0.8;color:white;">Your files are never stored. All processing is done securely.</span>
+            <span style="font-size:13px;opacity:0.8;color:black;">Your files are never stored. All processing is done securely.</span>
         </div>
     """, unsafe_allow_html=True)
        
