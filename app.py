@@ -855,7 +855,7 @@ if __name__ == "__main__":
                              "Image to PDF Converter"])
     if app_mode == "Home":
         home_page()   
-    elif app_mode == "Video to Visual Summaries (PDF)":
+    elif app_mode == "SnapScribe - Video to Visual Summaries":
         Upload_video_to_pdf()
     elif app_mode == "DeepRead":
         summarize_yt_video() 
