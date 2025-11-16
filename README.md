@@ -7,7 +7,7 @@ It combines **video summarization, transcript extraction, PDF generation, image-
 
 # 🚀 Features
 
-### 🎥 1. Summarize YouTube Videos (AI Notes Generator)
+### 🎥 1. DeepRead 
 - Extracts YouTube transcripts automatically  
 - Uses **HuggingFace BART model** to generate detailed notes  
 - Includes video preview, real-time progress, tabs for summary & transcript  
