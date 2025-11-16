@@ -17,7 +17,7 @@ load_dotenv() ##load all the environment variables
 from youtube_transcript_api import YouTubeTranscriptApi
 from transformers import pipeline
 from huggingface_hub import InferenceClient
-os.environ['HF_TOKEN'] = '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'
+os.environ['HF_TOKEN'] = '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'
 client = InferenceClient(
     provider="auto",
     api_key=os.environ["HF_TOKEN"],
@@ -148,7 +148,7 @@ def get_video_title(url):
 ## getting the transcript data from yt videos
 def extract_transcript_details(youtube_video_url):
     try:
-        video_id=youtube_video_url.split("=")[1]
+        video_id=get_video_id(youtube_video_url)
         yyt_api = YouTubeTranscriptApi()
         transcript_text=yyt_api.fetch(video_id).to_raw_data()
         print(transcript_text)
@@ -340,54 +340,80 @@ def summarize_yt_video():
             with st.spinner("🤓 Processing your video..."):
                 transcript_text = extract_transcript_details(youtube_link)
                 if transcript_text:
-                    pdf = FPDF()
-                    pdf.add_page()
-                    pdf.set_font("Arial", size=12)
+                pdf = FPDF("P", 'mm', 'A4')
+                pdf.add_page()
+                pdf.set_font("Arial", size=12)
+                pdf.set_auto_page_break(auto=True, margin=15)
+                pdf.set_margins(15, 15, 15)
+                pdf.cell(0, 10, "Full Transcript", ln=True, align='C')
+
+                
+                # Create directory if it doesn't exist
+                os.makedirs("output_pdf", exist_ok=True)
+                
+                # Split text into lines that fit on page
+                lines = [transcript_text[i:i+90] for i in range(0, len(transcript_text), 90)]
+                
+                # Add each line to PDF
+                for line in lines:
+                    pdf.cell(0, 10, txt=line, ln=True)
                     
-                    # Create directory if it doesn't exist
-                    os.makedirs("output_pdf", exist_ok=True)
+                # Save PDF
+                pdf.output("output_pdf/output_transcript.pdf")
+            if transcript_text:
+                # Show progress
+                progress_bar = st.progress(0)
+                for i in range(100):
+                    # Simulate progress
+                    progress_bar.progress(i + 1)
+                
+                summary = summarize_text(transcript_text, prompt)
+                pdf = FPDF("P", "mm", "A4")
+                pdf.add_page()
+                pdf.set_font("Arial", "B", size=8)
+                pdf.cell(0, 10, "Detailed Notes", ln=True, align='C')
+                pdf.ln(10)
+                
+                pdf.set_font("Arial", size=12)
+                full_text = "\n\n".join(summary)
+                pdf.multi_cell(0, 8, full_text)
+                pdf.ln(5)
+
+                
+                # Create directory if it doesn't exist
+                os.makedirs("output_pdf", exist_ok=True)
+                
+                # Save PDF
+                pdf.output("output_pdf/output_summary.pdf")
+                # Results in tabs
+                tab1, tab2 = st.tabs(["📝 Summary", "📚 Full Transcript"])
+                
+                with tab1:
+                    st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
+                    st.write(summary)
+                    st.markdown("</div>", unsafe_allow_html=True)
                     
-                    # Split text into lines that fit on page
-                    lines = [transcript_text[i:i+90] for i in range(0, len(transcript_text), 90)]
-                    
-                    # Add each line to PDF
-                    for line in lines:
-                        pdf.cell(0, 10, txt=line, ln=True)
-                        
-                    # Save PDF
-                    pdf.output("output_pdf/output_transcript.pdf")
-                if transcript_text:
-                    # Show progress
-                    progress_bar = st.progress(0)
-                    for i in range(100):
-                        # Simulate progress
-                        progress_bar.progress(i + 1)
-                    
-                    summary = summarize_text(transcript_text, prompt)
-                    
-                    # Results in tabs
-                    tab1, tab2 = st.tabs(["📝 Summary", "📚 Full Transcript"])
-                    
-                    with tab1:
-                        st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
-                        st.write(summary)
-                        st.markdown("</div>", unsafe_allow_html=True)
-                        
-                    with tab2:
-                        st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
-                        st.write(transcript_text)
-                        st.markdown("</div>", unsafe_allow_html=True)
-                    
-                    # Download buttons in columns
-                    col1, col2 = st.columns(2)
-                    if summary:
-                        with col1:
-                            st.download_button(
-                                "📥 Download Summary PDF",
-                                data=open("output_pdf/output_summary.pdf", "rb").read(),
-                                file_name="summary_notes.pdf",
-                                mime="application/pdf"
-                            )
+                with tab2:
+                    st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
+                    st.write(transcript_text)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                
+                # Download buttons in columns
+                col1, col2 = st.columns(2)
+                if summary:
+                    with col1:
+                        st.download_button(
+                            "📥 Download Summary PDF",
+                            data=open("output_pdf/output_summary.pdf", "rb").read(),
+                            file_name="summary_notes.pdf",
+                            mime="application/pdf"
+                        )
+                        st.download_button(
+                            "📥 Download Transcript PDF",
+                            data=open("output_pdf/output_transcript.pdf", "rb").read(),
+                            file_name="transcript.pdf",
+                            mime="application/pdf"
+                        )
                 else:
                     st.error("❌ Video does not have a transcript. Please check the video link.")
 
