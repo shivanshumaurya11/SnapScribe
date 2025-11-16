@@ -234,7 +234,7 @@ def summarize_yt_video():
     and informative for the reader.
     """
     st.set_page_config(
-    page_title="SnapScribe - Notes Generator",
+    page_title="DeepRead - Notes Generator",
     page_icon="📝",
     layout="wide"
     )
@@ -338,7 +338,7 @@ def summarize_yt_video():
     st.markdown("""
         <div class='logo-container'>
             <h1 style='font-size: 3rem; font-weight: 800; background: linear-gradient(45deg, #4776E6, #8E54E9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>
-                📚 SnapScribe
+                📚 DeepRead
             </h1>
             <p style='font-size: 1.2rem; color: #666; margin-top: 10px;'>
                 Transform Youtube Video Learning into Smart Summarized Notes
