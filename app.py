@@ -380,27 +380,27 @@ def summarize_yt_video():
                     pdf.ln(5)
 
                 
-                # Create directory if it doesn't exist
-                os.makedirs("output_pdf", exist_ok=True)
+                    # Create directory if it doesn't exist
+                    os.makedirs("output_pdf", exist_ok=True)
                 
-                # Save PDF
-                pdf.output("output_pdf/output_summary.pdf")
+                    # Save PDF
+                    pdf.output("output_pdf/output_summary.pdf")
                 # Results in tabs
-                tab1, tab2 = st.tabs(["📝 Summary", "📚 Full Transcript"])
+                    tab1, tab2 = st.tabs(["📝 Summary", "📚 Full Transcript"])
                 
-                with tab1:
+                    with tab1:
                     st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
                     st.write(summary)
                     st.markdown("</div>", unsafe_allow_html=True)
                     
-                with tab2:
+                    with tab2:
                     st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
                     st.write(transcript_text)
                     st.markdown("</div>", unsafe_allow_html=True)
                 
                 # Download buttons in columns
-                col1, col2 = st.columns(2)
-                if summary:
+                    col1, col2 = st.columns(2)
+                    if summary:
                     with col1:
                         st.download_button(
                             "📥 Download Summary PDF",
