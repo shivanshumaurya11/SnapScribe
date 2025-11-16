@@ -434,13 +434,8 @@ def Upload_video_to_pdf():
 
             st.write(f"Extracted frames have been saved to {output_pdf_path}")
             st.balloons()
-        st.download_button(
-            "📥 Download Summary PDF",
-            data=open("output_pdf_path.pdf", "rb").read(),
-            file_name=f"{output_pdf_path}.pdf",
-            mime="application/pdf"
-        )
-        # os.remove(temp_video_file_path)
+        st.download_button( "📥 Download Summary PDF", data=open("output_pdf_path.pdf", "rb").read(), file_name=f"{output_pdf_path}.pdf", mime="application/pdf" )
+        os.remove(temp_video_file_path)
 
 # ----------------------Pdf Merger----------------------
 def merge_pdfs():
