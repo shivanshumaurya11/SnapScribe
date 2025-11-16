@@ -1,45 +1,63 @@
-# 📘 SnapScribe – Next-Gen Video to Notes Converter
+# 📚 SnapScribe – AI-Powered Productivity & Learning Suite
 
-SnapScribe is an innovative tool that converts YouTube videos, playlists, Shorts, and livestreams into **high-quality PDF notes**.  
-It downloads the video, captures meaningful frames at regular intervals, skips duplicates, and compiles everything into a clean PDF named after the video title.  
-This makes it easy for students, educators, and professionals to save time, revise faster, and keep study material handy offline.
-
----
-
-## ✨ Features
-- 🎥 Works with **single videos, playlists, Shorts, and livestreams**  
-- 🖼 Captures **unique frames only** (avoids duplicates with SSIM filtering)  
-- 📑 Saves each video as a **PDF with the video title as filename**  
-- 🌐 Simple and interactive **Streamlit web interface**  
-- 💾 Download and store PDFs **offline for future use**  
+SnapScribe is an end-to-end AI productivity platform built for **students, educators, and professionals**.  
+It combines **video summarization, transcript extraction, PDF generation, image-to-PDF tools, frame extraction, and PDF utilities** into a single streamlined Streamlit application.
 
 ---
 
-## 🛠 Requirements
+# 🚀 Features
 
-- Python **3.8 or higher**  
-- Virtual environment (recommended)  
+### 🎥 1. Summarize YouTube Videos (AI Notes Generator)
+- Extracts YouTube transcripts automatically  
+- Uses **HuggingFace BART model** to generate detailed notes  
+- Includes video preview, real-time progress, tabs for summary & transcript  
+- Export summary as PDF  
 
-### Install dependencies
+### 🖼️ 2. Video → Visual Summary (Frames to PDF)
+- Upload local videos  
+- Extract unique frames using **SSIM similarity check**  
+- Control frame skip & similarity threshold  
+- Generate a clean PDF containing visually distinct frames  
 
-Create a `requirements.txt` with the following:
-- yt-dlp
-- opencv-python
-- opencv-python-headless
-- numpy
-- pillow
-- streamlit
-- scikit-image
-- fpdf or fpdf2
+### 📄 3. PDF Merger
+- Upload multiple PDFs  
+- Rearrange order  
+- Merge into a single combined PDF  
+- Glassmorphism-style UI  
 
-🚀 How to Run Locally
+### 🖼️ 4. Image to PDF Converter
+- Upload multiple images  
+- Reorder images  
+- Generate a high-quality multi-page PDF  
+- Supports JPG / PNG / JPEG  
 
-1.Clone or download this project:
-```
-git clone https://github.com/shivanshumaurya11/snapscribe.git
+---
+
+# 🛠️ Tech Stack
+
+### **Frontend / UI**
+- **Streamlit** (Primary UI framework)
+- Custom CSS animations & styling
+
+### **Backend Processing**
+- **yt-dlp** – video & playlist extraction  
+- **YouTubeTranscriptApi** – transcript extraction  
+- **OpenCV + SSIM** – frame extraction  
+- **Pillow** – image processing  
+- **FPDF** – PDF generation  
+- **PyPDF2** – merging PDFs  
+- **Transformers + HuggingFace** – summarization model  
+
+---
+
+# 📦 Installation
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/snapscribe.git
 cd snapscribe
-```
 I suggest download it.
+```
 
 2.Install dependencies:
 ```
