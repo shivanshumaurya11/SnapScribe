@@ -1,0 +1,14 @@
+yt-dlp
+opencv-python
+opencv-python-headless
+numpy
+Pillow
+streamlit
+scikit-image
+fpdf
+PyPDF2
+scikit-image
+python-dotenv
+youtube-transcript-api
+transformers
+huggingface-hub
