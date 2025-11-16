@@ -340,44 +340,44 @@ def summarize_yt_video():
             with st.spinner("🤓 Processing your video..."):
                 transcript_text = extract_transcript_details(youtube_link)
                 if transcript_text:
-                pdf = FPDF("P", 'mm', 'A4')
-                pdf.add_page()
-                pdf.set_font("Arial", size=12)
-                pdf.set_auto_page_break(auto=True, margin=15)
-                pdf.set_margins(15, 15, 15)
-                pdf.cell(0, 10, "Full Transcript", ln=True, align='C')
-
-                
-                # Create directory if it doesn't exist
-                os.makedirs("output_pdf", exist_ok=True)
-                
-                # Split text into lines that fit on page
-                lines = [transcript_text[i:i+90] for i in range(0, len(transcript_text), 90)]
-                
-                # Add each line to PDF
-                for line in lines:
-                    pdf.cell(0, 10, txt=line, ln=True)
+                    pdf = FPDF("P", 'mm', 'A4')
+                    pdf.add_page()
+                    pdf.set_font("Arial", size=12)
+                    pdf.set_auto_page_break(auto=True, margin=15)
+                    pdf.set_margins(15, 15, 15)
+                    pdf.cell(0, 10, "Full Transcript", ln=True, align='C')
+    
                     
-                # Save PDF
-                pdf.output("output_pdf/output_transcript.pdf")
-            if transcript_text:
+                    # Create directory if it doesn't exist
+                    os.makedirs("output_pdf", exist_ok=True)
+                    
+                    # Split text into lines that fit on page
+                    lines = [transcript_text[i:i+90] for i in range(0, len(transcript_text), 90)]
+                    
+                    # Add each line to PDF
+                    for line in lines:
+                        pdf.cell(0, 10, txt=line, ln=True)
+                        
+                    # Save PDF
+                    pdf.output("output_pdf/output_transcript.pdf")
+                if transcript_text:
                 # Show progress
-                progress_bar = st.progress(0)
-                for i in range(100):
+                    progress_bar = st.progress(0)
+                    for i in range(100):
                     # Simulate progress
-                    progress_bar.progress(i + 1)
+                        progress_bar.progress(i + 1)
                 
-                summary = summarize_text(transcript_text, prompt)
-                pdf = FPDF("P", "mm", "A4")
-                pdf.add_page()
-                pdf.set_font("Arial", "B", size=8)
-                pdf.cell(0, 10, "Detailed Notes", ln=True, align='C')
-                pdf.ln(10)
-                
-                pdf.set_font("Arial", size=12)
-                full_text = "\n\n".join(summary)
-                pdf.multi_cell(0, 8, full_text)
-                pdf.ln(5)
+                    summary = summarize_text(transcript_text, prompt)
+                    pdf = FPDF("P", "mm", "A4")
+                    pdf.add_page()
+                    pdf.set_font("Arial", "B", size=8)
+                    pdf.cell(0, 10, "Detailed Notes", ln=True, align='C')
+                    pdf.ln(10)
+                    
+                    pdf.set_font("Arial", size=12)
+                    full_text = "\n\n".join(summary)
+                    pdf.multi_cell(0, 8, full_text)
+                    pdf.ln(5)
 
                 
                 # Create directory if it doesn't exist
