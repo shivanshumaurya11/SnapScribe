@@ -854,11 +854,11 @@ if __name__ == "__main__":
                              "Merge PDFs", 
                              "Image to PDF Converter"])
     if app_mode == "Home":
-        home_page()
-    elif app_mode == "Summarize YouTube Video":
-        summarize_yt_video()    
+        home_page()   
     elif app_mode == "Video to Visual Summaries (PDF)":
-        Upload_video_to_pdf()   
+        Upload_video_to_pdf()
+    elif app_mode == "DeepRead":
+        summarize_yt_video() 
     elif app_mode == "Merge PDFs":
         merge_pdfs()
     elif app_mode == "Image to PDF Converter":
