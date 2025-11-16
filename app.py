@@ -17,7 +17,7 @@ load_dotenv() ##load all the environment variables
 from youtube_transcript_api import YouTubeTranscriptApi
 from transformers import pipeline
 from huggingface_hub import InferenceClient
-os.environ['HF_TOKEN'] = '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'
+from huggingface_hub import HfApi
 client = InferenceClient(
     provider="auto",
     api_key=os.environ["HF_TOKEN"],
