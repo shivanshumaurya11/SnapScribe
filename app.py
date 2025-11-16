@@ -426,15 +426,15 @@ def Upload_video_to_pdf():
         st.video(temp_video_file_path)
 
         with tempfile.TemporaryDirectory() as temp_folder:
-            with st.spinner("🤓 Processing your video...")
-            frames = extract_unique_frames(temp_video_file_path, temp_folder, frame_skip, similarity_threshold)
-
-            output_pdf_path = os.path.join("output_pdfs", os.path.splitext(upload_file.name)[0])
-            output_pdf_path = f"{output_pdf_path}.pdf"
-            frames_to_pdf(temp_folder, output_pdf_path, frames)
-
-            
-            st.balloons()
+            with st.spinner("🤓 Processing your video..."):
+                frames = extract_unique_frames(temp_video_file_path, temp_folder, frame_skip, similarity_threshold)
+    
+                output_pdf_path = os.path.join("output_pdfs", os.path.splitext(upload_file.name)[0])
+                output_pdf_path = f"{output_pdf_path}.pdf"
+                frames_to_pdf(temp_folder, output_pdf_path, frames)
+    
+                
+                st.balloons()
         st.download_button(
             label="⬇️ Download Generated PDF",
             data=open(output_pdf_path, "rb").read(),
