@@ -18,12 +18,52 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from transformers import pipeline
 from huggingface_hub import InferenceClient
 from huggingface_hub import HfApi
-client = InferenceClient(
-    provider="auto",
-    api_key=os.environ["HF_TOKEN"],
-)
+
+
 
 # ---------------------- Helper Functions ----------------------
+
+def get_hf_client():
+    # 1. Try environment variable (local machine / GitHub Actions)
+    token = os.getenv("HF_TOKEN")
+
+    # 2. Try Streamlit secrets (Streamlit Cloud deployment)
+    if not token:
+        try:
+            token = st.secrets["HF_TOKEN"]
+        except Exception:
+            pass
+
+    # 3. Try runtime paste (user enters HF token securely)
+    if not token:
+        token = st.session_state.get("HF_TOKEN")
+
+    # 4. If still missing → Ask user
+    if not token:
+        token_input = st.sidebar.text_input(
+            "🔐 Enter Hugging Face Token:",
+            type="password"
+        )
+        if token_input:
+            st.session_state["HF_TOKEN"] = token_input
+            token = token_input
+            st.sidebar.success("Token added to this session.")
+
+    # Final: If still not provided
+    if not token:
+        st.error("❌ No Hugging Face Token found. Please add your HF token.")
+        return None
+
+    # Create the client
+    try:
+        client = InferenceClient(
+            provider="auto",
+            api_key=token,
+        )
+        return client
+    except Exception as e:
+        st.error(f"Failed to initialize HF client: {e}")
+        return None
 
 def get_video_id(url):
     # Match YouTube Shorts URLs
@@ -163,6 +203,9 @@ def extract_transcript_details(youtube_video_url):
         return None
 
 def summarize_text(transcript_text,prompt):
+    client = get_hf_client()
+    if client is None:
+        return   # stop processing
     
     num_iters = int(len(transcript_text) / 1000)
     summarized_text = []
