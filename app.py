@@ -222,7 +222,7 @@ def summarize_text(transcript_text,prompt):
 def summarize_yt_video():
     st.warning(
     "This app does not work in the online environment. "
-    "You can still use it offline by downloading the entire project from my GitHub:" https://github.com/shivanshumaurya11/SnapScribe 
+    "You can still use it offline by downloading the entire project from my GitHub: https://github.com/shivanshumaurya11/SnapScribe " 
     "and running it locally on your system."
     )
     prompt="""You are a helpful assistant that converts YouTube video transcripts into detailed notes.
