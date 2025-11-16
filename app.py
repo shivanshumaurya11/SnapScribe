@@ -682,7 +682,7 @@ def image_to_pdf_converter():
 
     # ---------------------- HEADER ----------------------
     st.markdown("""
-        <div class="glass-box">
+        <div class="glass-box" style = "color: black">
             <h1 class="animated-title">🖼️ Image to PDF Converter</h1>
             <div class="subtitle">Transform your images into a single, high-quality PDF document.<br>
             <span style="font-size:16px;opacity:0.9;">Upload, arrange, and convert with ease!</span></div>
@@ -758,10 +758,10 @@ def home_page():
     """,unsafe_allow_html=True)
      # ---------------------- FOOTER ----------------------
     st.markdown("""
-        <div style="text-align:center; margin-top:38px; color:white; font-size:15px;">
+        <div style="text-align:center; margin-top:38px; color:black; font-size:15px;">
             <br><br><br><br><br><br><br><br>
             Made with ❤️ by <b>SnapScribe</b> • Secure • Fast • Beautiful<br>
-            <span style="font-size:13px;opacity:0.8;color:white;">Your files are never stored. All processing is done securely.</span>
+            <span style="font-size:13px;opacity:0.8;color:black;">Your files are never stored. All processing is done securely.</span>
         </div>
     """, unsafe_allow_html=True)
 # ---------------------- Main Application ----------------------
