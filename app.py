@@ -848,9 +848,9 @@ if __name__ == "__main__":
     if not os.path.exists("output_pdfs"):
         os.makedirs("output_pdfs", exist_ok=True)
     app_mode = st.sidebar.selectbox("Choose the feature you want to use:", 
-                            ["Home",
-                            "Summarize YouTube Video", 
-                             "Video to Visual Summaries (PDF)", 
+                            ["Home", 
+                             "SnapScribe - Video to Visual Summaries",
+                             "DeepRead",
                              "Merge PDFs", 
                              "Image to PDF Converter"])
     if app_mode == "Home":
