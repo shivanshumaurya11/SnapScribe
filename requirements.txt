@@ -9,6 +9,6 @@ fpdf
 PyPDF2
 scikit-image
 python-dotenv
-youtube-transcript-api
+youtube-transcript-api==1.2.3
 transformers
 huggingface-hub
