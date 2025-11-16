@@ -389,31 +389,31 @@ def summarize_yt_video():
                     tab1, tab2 = st.tabs(["📝 Summary", "📚 Full Transcript"])
                 
                     with tab1:
-                    st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
-                    st.write(summary)
-                    st.markdown("</div>", unsafe_allow_html=True)
+                        st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
+                        st.write(summary)
+                        st.markdown("</div>", unsafe_allow_html=True)
                     
                     with tab2:
-                    st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
-                    st.write(transcript_text)
-                    st.markdown("</div>", unsafe_allow_html=True)
+                        st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
+                        st.write(transcript_text)
+                        st.markdown("</div>", unsafe_allow_html=True)
                 
                 # Download buttons in columns
                     col1, col2 = st.columns(2)
                     if summary:
-                    with col1:
-                        st.download_button(
-                            "📥 Download Summary PDF",
-                            data=open("output_pdf/output_summary.pdf", "rb").read(),
-                            file_name="summary_notes.pdf",
-                            mime="application/pdf"
-                        )
-                        st.download_button(
-                            "📥 Download Transcript PDF",
-                            data=open("output_pdf/output_transcript.pdf", "rb").read(),
-                            file_name="transcript.pdf",
-                            mime="application/pdf"
-                        )
+                        with col1:
+                            st.download_button(
+                                "📥 Download Summary PDF",
+                                data=open("output_pdf/output_summary.pdf", "rb").read(),
+                                file_name="summary_notes.pdf",
+                                mime="application/pdf"
+                            )
+                            st.download_button(
+                                "📥 Download Transcript PDF",
+                                data=open("output_pdf/output_transcript.pdf", "rb").read(),
+                                file_name="transcript.pdf",
+                                mime="application/pdf"
+                            )
                 else:
                     st.error("❌ Video does not have a transcript. Please check the video link.")
 
