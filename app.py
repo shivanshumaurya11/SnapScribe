@@ -485,7 +485,7 @@ def Upload_video_to_pdf():
         page_icon="🎬",
         layout="centered"
     )
-    st.title("🎬 Local Video Processor: Generate PDF from Video Frames")
+    st.title("🎬 SnapScribe - Video to Visual Summaries")
 
     upload_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi", "mkv"])
     frame_skip = int(st.text_input("Frame Skip Value (Higher value means faster processing but may miss some frames):", value=200))
