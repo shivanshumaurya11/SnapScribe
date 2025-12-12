@@ -856,7 +856,7 @@ def home_page():
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 30px;
-            padding: 60px 50px;
+            padding: 60px 90px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             max-width: 900px;
             animation: slideInContent 1s ease-out;
