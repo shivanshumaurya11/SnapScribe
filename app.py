@@ -1252,6 +1252,83 @@ def home_page():
     </style>
     """, unsafe_allow_html=True)
     
+    # ---------------------- LANDING SECTION ----------------------
+    st.markdown("""
+    <div class="landing-hero">
+        <div class="landing-content">
+            <h1 class="landing-title">📚 SnapScribe</h1>
+            <p class="landing-subtitle">Your Ultimate Learning Companion</p>
+            <p class="landing-description">
+                Welcome to SnapScribe, the all-in-one platform designed to enhance your learning experience for both Students, Educators and Professionals! 
+                Whether you're looking to convert videos into summarized notes, extract images from videos, merge PDFs, or convert images to PDFs, 
+                SnapScribe has got you covered.
+            </p>
+            <div class="scroll-indicator">
+                <p>Scroll Down to Explore Tools</p>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # ---------------------- TOOLS SECTION ----------------------
+    st.markdown("""
+    <div class="tools-section">
+        <h2 class="section-title">✨ Explore Our Powerful Tools</h2>
+        <p class="section-subtitle">Choose any tool below to get started with your learning journey</p>
+    """, unsafe_allow_html=True)
+    
+    # Tools Grid
+    col1, col2 = st.columns(2, gap="large")
+    
+    with col1:
+        if st.button("""🎬
+
+Video to Visual Summaries
+
+Extract key frames from videos and create visual summaries as PDF documents.""", key="btn_video", use_container_width=True):
+            st.session_state.selected_tool = "SnapScribe - Video to Visual Summaries"
+            st.rerun()
+    
+    with col2:
+        if st.button("""📚
+
+DeepRead
+
+Transform YouTube videos into intelligent, detailed notes using AI-powered summarization.""", key="btn_deepread", use_container_width=True):
+            st.session_state.selected_tool = "DeepRead"
+            st.rerun()
+    
+    col3, col4 = st.columns(2, gap="large")
+    
+    with col3:
+        if st.button("""📄
+
+Merge PDFs
+
+Combine multiple PDF files into one organized document. Arrange files in your preferred order.""", key="btn_merge", use_container_width=True):
+            st.session_state.selected_tool = "Merge PDFs"
+            st.rerun()
+    
+    with col4:
+        if st.button("""🖼️
+
+Image to PDF
+
+Convert your images into high-quality PDF documents. Arrange and organize images seamlessly.""", key="btn_image", use_container_width=True):
+            st.session_state.selected_tool = "Image to PDF Converter"
+            st.rerun()
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # ---------------------- FOOTER ----------------------
+    st.markdown("""
+        <div class="footer-section">
+            <p class="footer-text">
+                Made with ❤️ by <b>SnapScribe</b> • Secure • Fast • Beautiful
+            </p>
+            <p class="footer-subtext">Your files are never stored. All processing is done securely on your device.</p>
+        </div>
+    """, unsafe_allow_html=True)
 # ---------------------- Main Application ----------------------
 if __name__ == "__main__":
     if not os.path.exists("output_pdfs"):
@@ -1280,5 +1357,3 @@ if __name__ == "__main__":
         image_to_pdf_converter()    
         
     
-
-
