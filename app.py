@@ -488,7 +488,7 @@ def Upload_video_to_pdf():
     st.title("🎬 SnapScribe - Video to Visual Summaries")
 
     upload_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi", "mkv"])
-    frame_skip = int(st.text_input("Frame Skip Value (Higher value means faster processing but may miss some frames):", value=200))
+    frame_skip = 100
     similarity_threshold = float(st.text_input("Similarity Threshold (0.0 to 1.0, lower means more frames):", value=0.9))
 
 
