@@ -1289,18 +1289,18 @@ Extract key frames from videos and create visual summaries as PDF documents.""",
             st.session_state.selected_tool = "SnapScribe - Video to Visual Summaries"
             st.rerun()
     
+#     with col2:
+#         if st.button("""📚
+
+# DeepRead
+
+# Transform YouTube videos into intelligent, detailed notes using AI-powered summarization.""", key="btn_deepread", use_container_width=True):
+#             st.session_state.selected_tool = "DeepRead"
+#             st.rerun()
+    
+#     col3, col4 = st.columns(2, gap="large")
+    
     with col2:
-        if st.button("""📚
-
-DeepRead
-
-Transform YouTube videos into intelligent, detailed notes using AI-powered summarization.""", key="btn_deepread", use_container_width=True):
-            st.session_state.selected_tool = "DeepRead"
-            st.rerun()
-    
-    col3, col4 = st.columns(2, gap="large")
-    
-    with col3:
         if st.button("""📄
 
 Merge PDFs
@@ -1309,7 +1309,7 @@ Combine multiple PDF files into one organized document. Arrange files in your pr
             st.session_state.selected_tool = "Merge PDFs"
             st.rerun()
     
-    with col4:
+    with col3:
         if st.button("""🖼️
 
 Image to PDF
@@ -1349,8 +1349,8 @@ if __name__ == "__main__":
         home_page()   
     elif st.session_state.selected_tool == "SnapScribe - Video to Visual Summaries":
         Upload_video_to_pdf()
-    elif st.session_state.selected_tool == "DeepRead":
-        summarize_yt_video() 
+    # elif st.session_state.selected_tool == "DeepRead":
+    #     summarize_yt_video() 
     elif st.session_state.selected_tool == "Merge PDFs":
         merge_pdfs()
     elif st.session_state.selected_tool == "Image to PDF Converter":
