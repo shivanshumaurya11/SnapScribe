@@ -185,295 +185,295 @@ def get_video_title(url):
 
 
 # ----------------------Summarize Yt Video----------------------
-## getting the transcript data from yt videos
-def extract_transcript_details(youtube_video_url):
-    try:
-        video_id=get_video_id(youtube_video_url)
-        yyt_api = YouTubeTranscriptApi()
-        transcript_text=yyt_api.fetch(video_id).to_raw_data()
-        print(transcript_text)
-        transcript = ""
-        for i in transcript_text:
-            transcript += " " + i["text"]
+# ## getting the transcript data from yt videos
+# def extract_transcript_details(youtube_video_url):
+#     try:
+#         video_id=get_video_id(youtube_video_url)
+#         yyt_api = YouTubeTranscriptApi()
+#         transcript_text=yyt_api.fetch(video_id).to_raw_data()
+#         print(transcript_text)
+#         transcript = ""
+#         for i in transcript_text:
+#             transcript += " " + i["text"]
 
-        return transcript
+#         return transcript
 
-    except Exception as e:
-        print(f"Error extracting transcript: {e}")
-        return None
+#     except Exception as e:
+#         print(f"Error extracting transcript: {e}")
+#         return None
 
-def summarize_text(transcript_text,prompt):
-    client = get_hf_client()
-    if client is None:
-        return   # stop processing
+# def summarize_text(transcript_text,prompt):
+#     client = get_hf_client()
+#     if client is None:
+#         return   # stop processing
     
-    num_iters = int(len(transcript_text) / 1000)
-    summarized_text = []
-    for i in range(0, num_iters + 1):
-        start = 0
-        start = i * 1000
-        end = (i + 1) * 1000
-        out = client.summarization(transcript_text[start:end],model="facebook/bart-large-cnn",)
-        print(out)
-        out = out["summary_text"]
-        summarized_text.append(out)
-    return summarized_text
+#     num_iters = int(len(transcript_text) / 1000)
+#     summarized_text = []
+#     for i in range(0, num_iters + 1):
+#         start = 0
+#         start = i * 1000
+#         end = (i + 1) * 1000
+#         out = client.summarization(transcript_text[start:end],model="facebook/bart-large-cnn",)
+#         print(out)
+#         out = out["summary_text"]
+#         summarized_text.append(out)
+#     return summarized_text
         
-def summarize_yt_video():
-    st.warning(
-    "This app does not work in the online environment. "
-    "You can still use it offline by downloading the entire project from my GitHub: https://github.com/shivanshumaurya11/SnapScribe " 
-    "and running it locally on your system."
-    )
-    prompt="""You are a helpful assistant that converts YouTube video transcripts into detailed notes.
-    Your task is to read the provided transcript and generate comprehensive notes that capture the key points, concepts, and ideas presented in the video.
-    Use clear headings, bullet points, and concise language to organize the information effectively.
-    Ensure that the notes are easy to read and understand, making them suitable for study or reference purposes.
-    Focus on accuracy and clarity, avoiding unnecessary jargon or complex language.
-    The goal is to create a valuable resource that summarizes the video's content in a way that is accessible
-    and informative for the reader.
-    """
-    st.set_page_config(
-    page_title="DeepRead - Notes Generator",
-    page_icon="📝",
-    layout="wide"
-    )
+# def summarize_yt_video():
+#     st.warning(
+#     "This app does not work in the online environment. "
+#     "You can still use it offline by downloading the entire project from my GitHub: https://github.com/shivanshumaurya11/SnapScribe " 
+#     "and running it locally on your system."
+#     )
+#     prompt="""You are a helpful assistant that converts YouTube video transcripts into detailed notes.
+#     Your task is to read the provided transcript and generate comprehensive notes that capture the key points, concepts, and ideas presented in the video.
+#     Use clear headings, bullet points, and concise language to organize the information effectively.
+#     Ensure that the notes are easy to read and understand, making them suitable for study or reference purposes.
+#     Focus on accuracy and clarity, avoiding unnecessary jargon or complex language.
+#     The goal is to create a valuable resource that summarizes the video's content in a way that is accessible
+#     and informative for the reader.
+#     """
+#     st.set_page_config(
+#     page_title="DeepRead - Notes Generator",
+#     page_icon="📝",
+#     layout="wide"
+#     )
 
-    # Enhanced CSS with modern student-friendly design
-    st.markdown("""
-    <style>
-        /* Modern gradient background */
-        .stApp {
-            background: linear-gradient(120deg, #f8f9fa 0%, #e9ecef 100%);
-            color: #2d3436;
-        }
+#     # Enhanced CSS with modern student-friendly design
+#     st.markdown("""
+#     <style>
+#         /* Modern gradient background */
+#         .stApp {
+#             background: linear-gradient(120deg, #f8f9fa 0%, #e9ecef 100%);
+#             color: #2d3436;
+#         }
         
-        /* Animated logo container */
-        .logo-container {
-            text-align: center;
-            margin-bottom: 2rem;
-            animation: float 6s ease-in-out infinite;
-        }
+#         /* Animated logo container */
+#         .logo-container {
+#             text-align: center;
+#             margin-bottom: 2rem;
+#             animation: float 6s ease-in-out infinite;
+#         }
         
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
+#         @keyframes float {
+#             0% { transform: translateY(0px); }
+#             50% { transform: translateY(-10px); }
+#             100% { transform: translateY(0px); }
+#         }
         
-        /* Modern card design */
-        .modern-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.4);
-        }
+#         /* Modern card design */
+#         .modern-card {
+#             background: rgba(255, 255, 255, 0.7);
+#             backdrop-filter: blur(10px);
+#             border-radius: 20px;
+#             padding: 30px;
+#             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+#             transition: all 0.3s ease;
+#             border: 1px solid rgba(255,255,255,0.4);
+#         }
         
-        .modern-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
+#         .modern-card:hover {
+#             transform: translateY(-5px);
+#             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+#         }
         
-        /* Animated button */
-        .stButton button {
-            background: linear-gradient(45deg, #4776E6, #8E54E9) !important;
-            color: white !important;
-            border: none !important;
-            padding: 12px 24px !important;
-            border-radius: 12px !important;
-            font-weight: 600 !important;
-            transition: all 0.3s ease !important;
-            box-shadow: 0 5px 15px rgba(71, 118, 230, 0.2) !important;
-        }
+#         /* Animated button */
+#         .stButton button {
+#             background: linear-gradient(45deg, #4776E6, #8E54E9) !important;
+#             color: white !important;
+#             border: none !important;
+#             padding: 12px 24px !important;
+#             border-radius: 12px !important;
+#             font-weight: 600 !important;
+#             transition: all 0.3s ease !important;
+#             box-shadow: 0 5px 15px rgba(71, 118, 230, 0.2) !important;
+#         }
         
-        .stButton button:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 8px 20px rgba(71, 118, 230, 0.3) !important;
-        }
+#         .stButton button:hover {
+#             transform: translateY(-2px) !important;
+#             box-shadow: 0 8px 20px rgba(71, 118, 230, 0.3) !important;
+#         }
         
-        /* Input field styling */
-        .stTextInput input {
-            border-radius: 12px !important;
-            padding: 15px !important;
-            font-size: 16px !important;
-            transition: all 0.3s ease !important;  
-            box-shadow: 0 0 0 3px white !important;
-            background: white !important;
-            color: black !important;
-            placeholder-color: black !important;
-        }
+#         /* Input field styling */
+#         .stTextInput input {
+#             border-radius: 12px !important;
+#             padding: 15px !important;
+#             font-size: 16px !important;
+#             transition: all 0.3s ease !important;  
+#             box-shadow: 0 0 0 3px white !important;
+#             background: white !important;
+#             color: black !important;
+#             placeholder-color: black !important;
+#         }
         
-        .stTextInput input:focus { 
-            box-shadow: 0 0 0 3px white !important;
-            background: white !important;
-            color: black !important;
-        }
+#         .stTextInput input:focus { 
+#             box-shadow: 0 0 0 3px white !important;
+#             background: white !important;
+#             color: black !important;
+#         }
         
-        /* Feature pills */
-        .feature-pill {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 20px;
-            background: rgba(71, 118, 230, 0.1);
-            color: #4776E6;
-            margin: 5px;
-            font-size: 14px;
-        }
+#         /* Feature pills */
+#         .feature-pill {
+#             display: inline-block;
+#             padding: 8px 16px;
+#             border-radius: 20px;
+#             background: rgba(71, 118, 230, 0.1);
+#             color: #4776E6;
+#             margin: 5px;
+#             font-size: 14px;
+#         }
         
-        /* Download button */
-        .stDownloadButton button {
-            background: linear-gradient(45deg, #00b09b, #96c93d) !important;
-            color: white !important;
-            border: none !important;
-            padding: 12px 24px !important;
-            border-radius: 12px !important;
-        }
-    </style>
-    """, unsafe_allow_html=True)
+#         /* Download button */
+#         .stDownloadButton button {
+#             background: linear-gradient(45deg, #00b09b, #96c93d) !important;
+#             color: white !important;
+#             border: none !important;
+#             padding: 12px 24px !important;
+#             border-radius: 12px !important;
+#         }
+#     </style>
+#     """, unsafe_allow_html=True)
 
-    # Enhanced Header with Animation
-    st.markdown("""
-        <div class='logo-container'>
-            <h1 style='font-size: 3rem; font-weight: 800; background: linear-gradient(45deg, #4776E6, #8E54E9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>
-                📚 DeepRead
-            </h1>
-            <p style='font-size: 1.2rem; color: #666; margin-top: 10px;'>
-                Transform Youtube Video Learning into Smart Summarized Notes
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
+#     # Enhanced Header with Animation
+#     st.markdown("""
+#         <div class='logo-container'>
+#             <h1 style='font-size: 3rem; font-weight: 800; background: linear-gradient(45deg, #4776E6, #8E54E9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>
+#                 📚 DeepRead
+#             </h1>
+#             <p style='font-size: 1.2rem; color: #666; margin-top: 10px;'>
+#                 Transform Youtube Video Learning into Smart Summarized Notes
+#             </p>
+#         </div>
+#     """, unsafe_allow_html=True)
 
-    # Feature Pills
-    st.markdown("""
-        <div style='text-align: center; margin-bottom: 2rem;'>
-            <div class='feature-pill'>✨ Smart Summarization</div>
-            <div class='feature-pill'>📝 Detailed Notes</div>
-            <div class='feature-pill'>💾 PDF Export</div>
-            <div class='feature-pill'>🎯 Key Points</div>
-        </div>
-    """, unsafe_allow_html=True)
+#     # Feature Pills
+#     st.markdown("""
+#         <div style='text-align: center; margin-bottom: 2rem;'>
+#             <div class='feature-pill'>✨ Smart Summarization</div>
+#             <div class='feature-pill'>📝 Detailed Notes</div>
+#             <div class='feature-pill'>💾 PDF Export</div>
+#             <div class='feature-pill'>🎯 Key Points</div>
+#         </div>
+#     """, unsafe_allow_html=True)
 
-    # Main Content in Modern Card
-    # st.markdown("<div class='modern-card'>", unsafe_allow_html=True)
+#     # Main Content in Modern Card
+#     # st.markdown("<div class='modern-card'>", unsafe_allow_html=True)
 
-    # Two-column layout
-    col1, col2 = st.columns([2, 1])
+#     # Two-column layout
+#     col1, col2 = st.columns([2, 1])
 
-    with col1:
-        youtube_link = st.text_input(" Paste YouTube Video Link:", placeholder="https://www.youtube.com/watch?v=...")
-        if youtube_link:
-            video_id = get_video_id(youtube_link)
-            if video_id:
-                st.video(f"https://www.youtube.com/watch?v={video_id}")
+#     with col1:
+#         youtube_link = st.text_input(" Paste YouTube Video Link:", placeholder="https://www.youtube.com/watch?v=...")
+#         if youtube_link:
+#             video_id = get_video_id(youtube_link)
+#             if video_id:
+#                 st.video(f"https://www.youtube.com/watch?v={video_id}")
 
-    with col2:
-        st.markdown("""
-            <div style='background: rgba(71, 118, 230, 0.05); padding: 20px; border-radius: 12px;'>
-                <h3 style='color: #4776E6; font-size: 1.2rem; margin-bottom: 10px;'>✨ How it works</h3>
-                <ol style='color: #666; font-size: 0.9rem; margin-left: 20px;'>
-                    <li>Paste your YouTube video link</li>
-                    <li>Click "Generate Smart Notes"</li>
-                    <li>Get instant notes & summary</li>
-                    <li>Download as PDF for offline use</li>
-                </ol>
-            </div>
-        """, unsafe_allow_html=True)
+#     with col2:
+#         st.markdown("""
+#             <div style='background: rgba(71, 118, 230, 0.05); padding: 20px; border-radius: 12px;'>
+#                 <h3 style='color: #4776E6; font-size: 1.2rem; margin-bottom: 10px;'>✨ How it works</h3>
+#                 <ol style='color: #666; font-size: 0.9rem; margin-left: 20px;'>
+#                     <li>Paste your YouTube video link</li>
+#                     <li>Click "Generate Smart Notes"</li>
+#                     <li>Get instant notes & summary</li>
+#                     <li>Download as PDF for offline use</li>
+#                 </ol>
+#             </div>
+#         """, unsafe_allow_html=True)
 
-    # Process Button
-    if youtube_link:
-        if st.button("🎯 Generate Smart Notes"):
-            with st.spinner("🤓 Processing your video..."):
-                transcript_text = extract_transcript_details(youtube_link)
-                if transcript_text:
-                    pdf = FPDF("P", 'mm', 'A4')
-                    pdf.add_page()
-                    pdf.set_font("Arial", size=12)
-                    pdf.set_auto_page_break(auto=True, margin=15)
-                    pdf.set_margins(15, 15, 15)
-                    pdf.cell(0, 10, "Full Transcript", ln=True, align='C')
+#     # Process Button
+#     if youtube_link:
+#         if st.button("🎯 Generate Smart Notes"):
+#             with st.spinner("🤓 Processing your video..."):
+#                 transcript_text = extract_transcript_details(youtube_link)
+#                 if transcript_text:
+#                     pdf = FPDF("P", 'mm', 'A4')
+#                     pdf.add_page()
+#                     pdf.set_font("Arial", size=12)
+#                     pdf.set_auto_page_break(auto=True, margin=15)
+#                     pdf.set_margins(15, 15, 15)
+#                     pdf.cell(0, 10, "Full Transcript", ln=True, align='C')
     
                     
-                    # Create directory if it doesn't exist
-                    os.makedirs("output_pdf", exist_ok=True)
+#                     # Create directory if it doesn't exist
+#                     os.makedirs("output_pdf", exist_ok=True)
                     
-                    # Split text into lines that fit on page
-                    lines = [transcript_text[i:i+90] for i in range(0, len(transcript_text), 90)]
+#                     # Split text into lines that fit on page
+#                     lines = [transcript_text[i:i+90] for i in range(0, len(transcript_text), 90)]
                     
-                    # Add each line to PDF
-                    for line in lines:
-                        pdf.cell(0, 10, txt=line, ln=True)
+#                     # Add each line to PDF
+#                     for line in lines:
+#                         pdf.cell(0, 10, txt=line, ln=True)
                         
-                    # Save PDF
-                    pdf.output("output_pdf/output_transcript.pdf")
-                if transcript_text:
-                # Show progress
-                    progress_bar = st.progress(0)
-                    for i in range(100):
-                    # Simulate progress
-                        progress_bar.progress(i + 1)
+#                     # Save PDF
+#                     pdf.output("output_pdf/output_transcript.pdf")
+#                 if transcript_text:
+#                 # Show progress
+#                     progress_bar = st.progress(0)
+#                     for i in range(100):
+#                     # Simulate progress
+#                         progress_bar.progress(i + 1)
                 
-                    summary = summarize_text(transcript_text, prompt)
-                    pdf = FPDF("P", "mm", "A4")
-                    pdf.add_page()
-                    pdf.set_font("Arial", "B", size=8)
-                    pdf.cell(0, 10, "Detailed Notes", ln=True, align='C')
-                    pdf.ln(10)
+#                     summary = summarize_text(transcript_text, prompt)
+#                     pdf = FPDF("P", "mm", "A4")
+#                     pdf.add_page()
+#                     pdf.set_font("Arial", "B", size=8)
+#                     pdf.cell(0, 10, "Detailed Notes", ln=True, align='C')
+#                     pdf.ln(10)
                     
-                    pdf.set_font("Arial", size=12)
-                    full_text = "\n\n".join(summary)
-                    pdf.multi_cell(0, 8, full_text)
-                    pdf.ln(5)
+#                     pdf.set_font("Arial", size=12)
+#                     full_text = "\n\n".join(summary)
+#                     pdf.multi_cell(0, 8, full_text)
+#                     pdf.ln(5)
 
                 
-                    # Create directory if it doesn't exist
-                    os.makedirs("output_pdf", exist_ok=True)
+#                     # Create directory if it doesn't exist
+#                     os.makedirs("output_pdf", exist_ok=True)
                 
-                    # Save PDF
-                    pdf.output("output_pdf/output_summary.pdf")
-                # Results in tabs
-                    tab1, tab2 = st.tabs(["📝 Summary", "📚 Full Transcript"])
+#                     # Save PDF
+#                     pdf.output("output_pdf/output_summary.pdf")
+#                 # Results in tabs
+#                     tab1, tab2 = st.tabs(["📝 Summary", "📚 Full Transcript"])
                 
-                    with tab1:
-                        st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
-                        st.write(summary)
-                        st.markdown("</div>", unsafe_allow_html=True)
+#                     with tab1:
+#                         st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
+#                         st.write(summary)
+#                         st.markdown("</div>", unsafe_allow_html=True)
                     
-                    with tab2:
-                        st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
-                        st.write(transcript_text)
-                        st.markdown("</div>", unsafe_allow_html=True)
+#                     with tab2:
+#                         st.markdown("<div style='background: white; padding: 20px; border-radius: 12px;color :black'>", unsafe_allow_html=True)
+#                         st.write(transcript_text)
+#                         st.markdown("</div>", unsafe_allow_html=True)
                 
-                # Download buttons in columns
-                    col1, col2 = st.columns(2)
-                    if summary:
-                        with col1:
-                            st.download_button(
-                                "📥 Download Summary PDF",
-                                data=open("output_pdf/output_summary.pdf", "rb").read(),
-                                file_name="summary_notes.pdf",
-                                mime="application/pdf"
-                            )
-                            st.download_button(
-                                "📥 Download Transcript PDF",
-                                data=open("output_pdf/output_transcript.pdf", "rb").read(),
-                                file_name="transcript.pdf",
-                                mime="application/pdf"
-                            )
-                else:
-                    st.error("❌ Video does not have a transcript. Please check the video link.")
+#                 # Download buttons in columns
+#                     col1, col2 = st.columns(2)
+#                     if summary:
+#                         with col1:
+#                             st.download_button(
+#                                 "📥 Download Summary PDF",
+#                                 data=open("output_pdf/output_summary.pdf", "rb").read(),
+#                                 file_name="summary_notes.pdf",
+#                                 mime="application/pdf"
+#                             )
+#                             st.download_button(
+#                                 "📥 Download Transcript PDF",
+#                                 data=open("output_pdf/output_transcript.pdf", "rb").read(),
+#                                 file_name="transcript.pdf",
+#                                 mime="application/pdf"
+#                             )
+#                 else:
+#                     st.error("❌ Video does not have a transcript. Please check the video link.")
 
-    st.markdown("</div>", unsafe_allow_html=True)
+#     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Footer
-    st.markdown("""
-        <div style='text-align: center; margin-top: 2rem; padding: 20px; color: #666;'>
-            <p>Made with ❤️ - SnapScribe</p>
-            <p style='font-size: 0.8rem;'>Use SnapScribe to enhance your learning experience</p>
-        </div>
-    """, unsafe_allow_html=True)
+#     # Footer
+#     st.markdown("""
+#         <div style='text-align: center; margin-top: 2rem; padding: 20px; color: #666;'>
+#             <p>Made with ❤️ - SnapScribe</p>
+#             <p style='font-size: 0.8rem;'>Use SnapScribe to enhance your learning experience</p>
+#         </div>
+#     """, unsafe_allow_html=True)
 
        
 # ---------------------- Video to Visual Summaries ----------------------
